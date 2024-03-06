@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My IP Address</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom right, #000000, #111111);
+            color: #00ff00; /* Neon green color */
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        p {
+            font-size: 2rem;
+            color: #ff0000; /* Red color */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Your IP Address</h1>
+        <p id="ip-address">Loading...</p>
+    </div>
+
+    <script>
+        window.onload = function() {
+            fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const ipAddress = data.ip;
+                const ipAddressArray = ipAddress.split('.').map(number => `<span style="color: #ff0000;">${number}</span>`);
+                document.getElementById('ip-address').innerHTML = ipAddressArray.join('.');
+            })
+            .catch(error => {
+                document.getElementById('ip-address').textContent = 'Error fetching IP address';
+                console.error('Error:', error);
+            });
+        };
+    </script>
+</body>
+</html>
