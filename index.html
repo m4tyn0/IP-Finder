@@ -41,6 +41,9 @@
                 const ipAddress = data.ip;
                 const ipAddressArray = ipAddress.split('.').map(number => `<span style="color: #ff0000;">${number}</span>`);
                 document.getElementById('ip-address').innerHTML = ipAddressArray.join('.');
+                console.log(ipAddress);
+                console.log(ipAddressArray);
+                console.log(data.ip);
             })
             .catch(error => {
                 document.getElementById('ip-address').textContent = 'Error fetching IP address';
